@@ -93,7 +93,7 @@ $(document).ready(function () {
         <p class="h4 mb-4">Confirm OTP</p>
         <input type="number" id="userOTP" class="form-control" placeholder="Enter OTP" aria-describedby="defaultOtpHelpBlock">
         <small id="defaultOtpHelpBlock" class="form-text text-muted mb-4">
-          Enter 5 digit code that we will sendon your Email</small>
+          Enter 4 digit code that we will sendon your Email</small>
         <button class="btn btn-info my-4 btn-block waves-effect waves-light" type="submit">Submit</button>
         </form>`;
     let data = jQFormSerializeArrToJson($(e.parentNode).serializeArray());

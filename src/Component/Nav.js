@@ -1,4 +1,18 @@
-const NavBar =()=>(
+const NavBar =()=>{
+  const register =()=>{
+    document.getElementById("signIn").className="tab-pane fade"
+    document.getElementById("register").className="tab-pane fade show active";
+    document.getElementById("signIn-tab").className="nav-link"
+    document.getElementById("register-tab").className="nav-link active"
+
+  }
+  const login =()=>{
+    document.getElementById("signIn").className="tab-pane fade  show active"
+    document.getElementById("register").className="tab-pane fade";
+    document.getElementById("signIn-tab").className="nav-link  active"
+    document.getElementById("register-tab").className="nav-link"
+  }
+return(
   <div>
     <nav className="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
     <div className="container">
@@ -34,35 +48,31 @@ const NavBar =()=>(
 
         <ul className="navbar-nav nav-flex-icons ml-auto">
           <li className="nav-item">
-            <a className="nav-link" href="https://m.facebook.com/techclubreck/" target="_blank" rel="nofollow">
+            <a className="nav-link" href="https://m.facebook.com/techclubreck/" target="_blank" rel="noreferrer">
               <i className="fab fa-facebook-f" aria-hidden="true"></i>
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="https://twitter.com/KannaujRec" target="_blank" rel="nofollow">
+            <a className="nav-link" href="https://twitter.com/KannaujRec" target="_blank" rel="noreferrer">
               <i className="fab fa-twitter" aria-hidden="true"></i>
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="https://www.instagram.com/abhyutthan.reck/" target="_blank" rel="nofollow">
+            <a className="nav-link" href="https://www.instagram.com/abhyutthan.reck/" target="_blank" rel="noreferrer">
               <i className="fab fa-instagram" aria-hidden="true"></i>
             </a>
           </li>
         </ul>
         <div className="" role="tablist">
-          <a className="btn btn-sm btn-primary" href="#account" >Register</a>
-          <a className="btn btn-sm btn-outline-primary" href="#account" >Login</a>
+          <a className="btn btn-sm btn-primary" href="#account" onClick={register}>Register</a>
+          <a className="btn btn-sm btn-outline-primary" href="#account" onClick={login}>Login</a>
         </div>
         
       </div>
     </div>
   </nav>
-  <script type="text/javascript" src="../public/js/jquery.js"></script>
-    <script type="text/javascript" src="../public/js/popper.js"></script>
-    <script type="text/javascript" src="../public/js/bootstrap.js"></script>
-    <script type="text/javascript" src="../public/js/mdb.js"></script>
-    <script src="/js/script.js"></script>
+  
 </div>
-)
+)}
 
 export default NavBar
