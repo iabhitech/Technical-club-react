@@ -18,9 +18,9 @@ const Footer=()=>(
           <a className="tw-ic" href="https://twitter.com/KannaujRec" target="_blank" rel="noreferrer">
             <i className="fab fa-twitter white-text mr-4"> </i>
           </a>
-          <a className="li-ic" href="#/">
+          {/* <a className="li-ic" href="#/">
             <i className="fab fa-linkedin-in white-text mr-4"> </i>
-          </a>
+          </a> */}
           <a className="ins-ic" href="https://www.instagram.com/abhyutthan.reck/" target="_blank" rel="noreferrer">
             <i className="fab fa-instagram white-text"> </i>
           </a>
