@@ -1,0 +1,16 @@
+.formMembership-input{
+  border: 1px solid rgb(117, 180, 227);
+  border-radius: 10px;
+  background-color: rgb(242, 248, 254);
+  color: rgb(92, 132, 240);
+}
+.formMembership-input:focus {
+  outline: 0px !important;
+  -webkit-appearance: none;
+  box-shadow: none !important;
+  background-color: rgb(242, 248, 254);
+  border-color: rgb(92, 132, 240);
+  color: rgb(92, 132, 240);
+  height: 50px;
+  font-size: 20px;
+}

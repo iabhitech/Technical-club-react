@@ -1,6 +1,6 @@
 const AboutUs = () => (
   <div>
-    <a name="about-us"></a>
+    <a name="about-us" href="#/" style={{fontSize:"0.01px"}} target="_blank" rel="noopener noreferrer" >a</a>
     <div className="container mt-2 py-5">
       <section className="dark-grey-text text-center ">
         <h3 className="font-weight-bold mb-4 pb-2">About Us</h3>
@@ -11,7 +11,7 @@ const AboutUs = () => (
               <a
                 href="http://reck.ac.in/"
                 target="_blank"
-                rel="nofollow noopener"
+                rel="noreferrer"
               >
                 Rajkiya Engineering College, Kannauj
               </a>{" "}

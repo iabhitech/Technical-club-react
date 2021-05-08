@@ -7,7 +7,7 @@ const Subscribe=()=>(
             <img
               src="https://mdbootstrap.com/img/illustrations/undraw_Group_chat_unwm.svg"
               className="img-fluid"
-              alt="smaple image"
+              alt="Something Went Wrong"
             />
           </div>
         </div>

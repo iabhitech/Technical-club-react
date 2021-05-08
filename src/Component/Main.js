@@ -1,21 +1,18 @@
-import FeacherTeam from "./FeacherTeam"
-import OurAchievements from "./OurAchievements"
-import AboutUs from "./AboutUs"
+import FeacherTeam from "./FeacherTeam";
+import OurAchievements from "./OurAchievements";
+import AboutUs from "./AboutUs";
 import Testimonials from "./Testimonials";
-import Subscribe from "./Subscribe"
+import Subscribe from "./Subscribe";
 import FAQ from "./FAQ";
-import ContactUs from "./ContactUs"
-
+// import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { useState } from "react";
-const axios = require("axios");
-const qs = require("qs");
+import Api from "../Api";
 
-const Main = () => {
+const Main = ({ userLoggedIn }) => {
   const [forgetEmail, setforgetEmail] = useState("");
   const [forgetOtp, setForgetOtp] = useState("");
   const [forgetPassword, setForgetPassword] = useState("");
   const [forgetConfirmPassword, setForgetConfirmPassword] = useState("");
-
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
@@ -27,6 +24,7 @@ const Main = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setconfirmPassword] = useState("");
   const [otp, setOtp] = useState("");
+
   const dataRegistrationForm = {
     firstName,
     lastName,
@@ -35,6 +33,11 @@ const Main = () => {
     password,
     confirmPassword,
   };
+  const LoginFormData = {
+    loginEmail,
+    loginPassword,
+  };
+
   const register = (e) => {
     e.preventDefault();
     document.getElementById("forget-password-form").hidden = true;
@@ -50,17 +53,17 @@ const Main = () => {
     document.getElementById("signIn-tab").className = "nav-link  active";
     document.getElementById("register-tab").className = "nav-link";
   };
+  const forgetForm = () => {
+    document.getElementById("forget-password-form").hidden = false;
+    document.getElementById("signIn").className = "tab-pane fade";
+    document.getElementById("signIn-tab").className = "nav-link";
+  };
   const registerNow = async (e) => {
     e.preventDefault();
-    const responce = await axios({
-      url: "http://localhost:3000/signup/postotp",
-      data: qs.stringify(dataRegistrationForm),
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      method: "POST",
-    });
+    const response = await Api.registerNow(dataRegistrationForm);
     if (
-      responce.data.toString() === "Otp Send successfully" ||
-      responce.data.toString() === "Your Otp Updated"
+      response.toString() === "Otp Send successfully" ||
+      response.toString() === "Your Otp Updated"
     ) {
       document.getElementById("otpdiv").hidden = false;
       document.getElementById("defaultRegisterbutton").hidden = true;
@@ -73,109 +76,107 @@ const Main = () => {
       ).disabled = true;
       document.getElementById("defaultRegisterPhonePassword").disabled = true;
     } else if (
-      responce.data.toString() ===
-      "Your Password and Confirm Password are not Match"
+      response.toString() === "Your Password and Confirm Password are not Match"
     ) {
       document.getElementById("defaultpassworcheckblock").innerText =
         "Your Password and Confirm Password are not Match";
-    } else if (responce.data.toString() === "Your Password is not correct") {
+    } else if (response.toString() === "Your Password is not correct") {
       document.getElementById("defaultpassworcheckblock").innerText =
         "Your Password is not correct we need your password in otp varification";
     }
   };
-  const sendOtp = async (e) => {
+  const registerOtpSubmit = async (e) => {
     e.preventDefault();
-    const responce = await axios({
-      url: "http://localhost:3000/signup/confirmpostotp",
-      data: qs.stringify({ ...dataRegistrationForm, otp }),
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      method: "POST",
+    const response = await Api.registerOtpSubmit({
+      ...dataRegistrationForm,
+      otp,
     });
-    if (responce.data.toString() === "Otp is not correct") {
+    if (response.message.toString() === "Otp is not correct") {
       document.getElementById("defaultOtpHelpBlock").innerText =
         "Otp is not correct";
-    } else if (responce.data.toString() === "No User Found") {
+    } else if (response.message.toString() === "No User Found") {
       document.getElementById("defaultOtpHelpBlock").innerText =
         "No User Found with this email";
-    } else if (responce.data.toString() === "Otp Match successfully") {
+    } else if (response.message.toString() === "Otp Match successfully") {
       document.getElementById("defaultOtpHelpBlock").innerText =
         "Your Account is Created";
+      localStorage.setItem("fullName", response.data.fullName);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("email", response.data.email);
+      localStorage.setItem("role", response.data.role);
+      localStorage.setItem("mobile", response.data.mobileNumber);
+      userLoggedIn("userEmail", response.data.email);
+      userLoggedIn("userFullName", response.data.fullName);
+      userLoggedIn("userId", response.data._id);
+      userLoggedIn("userRole", response.data.role);
     }
-  };
-  const forgetForm = () => {
-    document.getElementById("forget-password-form").hidden = false;
-    document.getElementById("signIn").className = "tab-pane fade";
-    document.getElementById("signIn-tab").className = "nav-link";
-  };
-  const LoginFormData = {
-    loginEmail,
-    loginPassword,
   };
   const loginSubmit = async (e) => {
     e.preventDefault();
-    const responce = await axios({
-      url: "http://localhost:3000/login/email",
-      data: qs.stringify(LoginFormData),
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      method: "POST",
-    });
-    console.log(responce.data);
-    if (responce.data.toString() === "No User Exist with this Email") {
+    const response = await Api.login(LoginFormData);
+    if (response.message.toString() === "Your Password is Correct") {
+      document.getElementById("defaultsignninHelpBlock").innerText =
+        "You are Logged IN";
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("role", response.data.role);
+      localStorage.setItem("fullName", response.data.fullName);
+      localStorage.setItem("email", response.data.email);
+      localStorage.setItem("mobile", response.data.mobileNumber);
+      userLoggedIn("userEmail", response.data.email);
+      userLoggedIn("userFullName", response.data.fullName);
+      userLoggedIn("userId", response.data._id);
+      userLoggedIn("userRole", response.data.role);
+    } else if (
+      response.message.toString() === "No User Exist with this Email"
+    ) {
       document.getElementById("defaultsignninHelpBlock").innerText =
         "No User Exist with this Email";
-    } else if (responce.data.toString() === "No User Found") {
+    } else if (response.message?.toString() === "No User Found") {
       document.getElementById("defaultOtpHelpBlock").innerText =
         "No User Found with this email";
     }
   };
   const forgetOtpSubmit = async (e) => {
     e.preventDefault();
-    const responce = await axios({
-      url: "http://localhost:3000/signup/forgetotp",
-      data: qs.stringify({ email: forgetEmail }),
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      method: "POST",
-    });
-    console.log(responce.data);
-    if(responce.data.toString()==="Otp Send successfully"){
-      console.log("otp send successfullt");
-      document.getElementById("defaultforgetformbutton").hidden=true;
-      document.getElementById("defaultotpforgetpassword").hidden= false;
-      document.getElementById("defaultforgetpasswordEmail").disabled=true;
-    }
-    else if(responce.data.toString()==="No User Found with this Email"){
-      document.getElementById("defaultregisterformHelpBlock").innerText="No User Found with this Email"
+    const response = await Api.forgetOtpSubmit({ email: forgetEmail });
+    if (response.toString() === "Otp Send successfully") {
+      console.log("otp send successfully");
+      document.getElementById("defaultforgetformbutton").hidden = true;
+      document.getElementById("defaultotpforgetpassword").hidden = false;
+      document.getElementById("defaultforgetpasswordEmail").disabled = true;
+    } else if (response.toString() === "No User Found with this Email") {
+      document.getElementById("defaultregisterformHelpBlock").innerText =
+        "No User Found with this Email";
     }
   };
-  const submitForgetOtp= async (e) => {
+  const submitForgetOtp = async (e) => {
     e.preventDefault();
-    const responce = await axios({
-      url: "http://localhost:3000/signup/submitforgetotp",
-      data: qs.stringify({ email: forgetEmail,otp:forgetOtp }),
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      method: "POST",
-    });
-    console.log(responce.data);
-    if(responce.data.toString()===`Otp Match successfully`){
+    const response = await Api.submitForgetOtp({ email: forgetEmail, otp: forgetOtp });
+    if (response.toString() === `Otp Match successfully`) {
       document.getElementById("userforgetpasswordOTP").disabled = true;
-      document.getElementById("defaultotppassword").hidden=false;
-      document.getElementById("defaultforgetpasswordbutton").hidden= true;
-    }else if(responce.data.toString()===`Otp not Match`){
-      document.getElementById("defaultregisterformOtpHelpBlock").innerText=`Otp not Match`;
-    }else{
-      document.getElementById("defaultregisterformOtpHelpBlock").innerText=`No User Found with this Email`;
+      document.getElementById("defaultotppassword").hidden = false;
+      document.getElementById("defaultforgetpasswordbutton").hidden = true;
+    } else if (response.toString() === `Otp not Match`) {
+      document.getElementById(
+        "defaultregisterformOtpHelpBlock"
+      ).innerText = `Otp not Match`;
+    } else {
+      document.getElementById(
+        "defaultregisterformOtpHelpBlock"
+      ).innerText = `No User Found with this Email`;
     }
-  }
-  const forgetPasswordSubmit=async (e)=>{
+  };
+  const forgetPasswordSubmit = async (e) => {
     e.preventDefault();
-    const responce = await axios({
-      url: "http://localhost:3000/signup/submitforgetpassword",
-      data: qs.stringify({ email: forgetEmail,otp:forgetOtp,password: forgetPassword,confirmPassword: forgetConfirmPassword}),
-      headers: { "content-type": "application/x-www-form-urlencoded" },
-      method: "POST",
+    const response = await Api.forgetPasswordSubmit({
+      email: forgetEmail,
+      otp: forgetOtp,
+      password: forgetPassword,
+      confirmPassword: forgetConfirmPassword,
     });
-    document.getElementById("defaultregisterformPasswordHelpBlock").innerText=responce.data;
-   } 
+    document.getElementById("defaultregisterformPasswordHelpBlock").innerText =
+      response;
+  };
   return (
     <div>
       <main className="mt-0">
@@ -286,6 +287,7 @@ const Main = () => {
                           <a
                             style={{ color: "rgb(92,132,240)" }}
                             onClick={(e) => forgetForm(e)}
+                            href="#/"
                           >
                             Forgot password?
                           </a>
@@ -305,22 +307,27 @@ const Main = () => {
                         <a
                           onClick={(e) => register(e)}
                           style={{ color: "rgb(92,132,240)" }}
+                          href="#/"
                         >
                           Register
                         </a>
                       </p>
 
                       {/* <!-- <p>or sign in with:</p> */}
-                      <a href="#" className="mx-2" role="button">
+                      <a
+                        className="mx-2"
+                        role="button"
+                        href="http://localhost:3000/auth/google"
+                      >
                         <i className="fab fa-google light-blue-text"></i>
                       </a>
-                      <a href="#" className="mx-2" role="button">
+                      <a href="#/" className="mx-2" role="button">
                         <i className="fab fa-facebook-f light-blue-text"></i>
                       </a>
-                      <a href="#" className="mx-2" role="button">
+                      <a href="#/" className="mx-2" role="button">
                         <i className="fab fa-linkedin-in light-blue-text"></i>
                       </a>
-                      <a href="#" className="mx-2" role="button">
+                      <a href="#/" className="mx-2" role="button">
                         <i className="fab fa-github light-blue-text"></i>
                       </a>
                     </form>
@@ -345,30 +352,30 @@ const Main = () => {
                       className="form-text text-muted mb-4"
                     ></small>
                     <div hidden id="defaultotpforgetpassword">
-                    <input
-                          type="number"
-                          id="userforgetpasswordOTP"
-                          max="9999"
-                          className="form-control"
-                          placeholder="Enter OTP"
-                          aria-describedby="defaultOtpforgrtpassswordHelpBlock"
-                          onChange={(e) => setForgetOtp(e.target.value)}
-                        />
-                         <small
-                      id="defaultregisterformOtpHelpBlock"
-                      className="form-text text-muted mb-4"
-                    ></small>
-                        <button
-                      className="btn btn-info btn-block my-4"
-                      type="submit"
-                      id="defaultforgetpasswordbutton"
-                      onClick={(e) => submitForgetOtp(e)}
-                    >
-                      Verify
-                    </button>
+                      <input
+                        type="number"
+                        id="userforgetpasswordOTP"
+                        max="9999"
+                        className="form-control"
+                        placeholder="Enter OTP"
+                        aria-describedby="defaultOtpforgrtpassswordHelpBlock"
+                        onChange={(e) => setForgetOtp(e.target.value)}
+                      />
+                      <small
+                        id="defaultregisterformOtpHelpBlock"
+                        className="form-text text-muted mb-4"
+                      ></small>
+                      <button
+                        className="btn btn-info btn-block my-4"
+                        type="submit"
+                        id="defaultforgetpasswordbutton"
+                        onClick={(e) => submitForgetOtp(e)}
+                      >
+                        Verify
+                      </button>
                     </div>
-                      <div hidden id="defaultotppassword">
-                    <input
+                    <div hidden id="defaultotppassword">
+                      <input
                         type="password"
                         name="password"
                         id="defaultOtpFormPassword"
@@ -383,20 +390,22 @@ const Main = () => {
                         id="defaultOtpconfirmFormPassword"
                         className="form-control form-registerNow"
                         placeholder="Confirm Password"
-                        onChange={(e) => setForgetConfirmPassword(e.target.value)}
+                        onChange={(e) =>
+                          setForgetConfirmPassword(e.target.value)
+                        }
                       />
                       <small
-                      id="defaultregisterformPasswordHelpBlock"
-                      className="form-text text-muted mb-4"
-                    ></small>
+                        id="defaultregisterformPasswordHelpBlock"
+                        className="form-text text-muted mb-4"
+                      ></small>
                       <button
-                      className="btn btn-info btn-block my-4"
-                      type="submit"
-                      id="defaultpasswordforgetformbutton"
-                      onClick={(e) => forgetPasswordSubmit(e)}
-                    >
-                      Submit
-                    </button>
+                        className="btn btn-info btn-block my-4"
+                        type="submit"
+                        id="defaultpasswordforgetformbutton"
+                        onClick={(e) => forgetPasswordSubmit(e)}
+                      >
+                        Submit
+                      </button>
                     </div>
                     <div className="d-flex justify-content-around">
                       <div>
@@ -405,9 +414,13 @@ const Main = () => {
                               <label className="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
                           </div> --> */}
                       </div>
-                    
+
                       <div>
-                        <a style={{ color: "rgb(92,132,240)" }} onClick={login}>
+                        <a
+                          style={{ color: "rgb(92,132,240)" }}
+                          onClick={login}
+                          href="#/"
+                        >
                           Sign In?
                         </a>
                       </div>
@@ -421,13 +434,13 @@ const Main = () => {
                     >
                       Verify
                     </button>
-                    
 
                     <p>
                       Not a member?
                       <a
                         onClick={(e) => register(e)}
                         style={{ color: "rgb(92,132,240)" }}
+                        href="#/"
                       >
                         Register
                       </a>
@@ -446,7 +459,6 @@ const Main = () => {
                       onSubmit={registerNow}
                     >
                       <p className="h4 mb-4">Sign up</p>
-
                       <div className="form-row mb-4">
                         <div className="col">
                           <input
@@ -469,7 +481,6 @@ const Main = () => {
                           />
                         </div>
                       </div>
-
                       <input
                         type="email"
                         name="email"
@@ -478,7 +489,6 @@ const Main = () => {
                         placeholder="E-mail"
                         onChange={(e) => setEmail(e.target.value)}
                       />
-
                       <input
                         type="password"
                         name="password"
@@ -502,7 +512,6 @@ const Main = () => {
                       >
                         At least 8 characters and 1 digit
                       </small>
-
                       <input
                         type="number"
                         name="MobieNumber"
@@ -544,21 +553,18 @@ const Main = () => {
                           className="btn btn-info my-4 btn-block waves-effect waves-light"
                           type="submit"
                           id="registerButton"
-                          onClick={sendOtp}
+                          onClick={registerOtpSubmit}
                         >
                           Submit
                         </button>
                       </div>
-
                       {/* <!-- <small id="defaultRegisterFormPhoneHelpBlock" className="form-text text-muted mb-4">
                       Optional - for two step authentication
                   </small> --> */}
-
                       {/* <!-- <div className="custom-control custom-checkbox">
                       <input type="checkbox" className="custom-control-input" id="defaultRegisterFormNewsletter">
                       <label className="custom-control-label" for="defaultRegisterFormNewsletter">Subscribe to our newsletter</label>
                   </div> --> */}
-
                       <button
                         className="btn btn-info my-4 btn-block"
                         type="submit"
@@ -566,27 +572,38 @@ const Main = () => {
                       >
                         REGISTER NOW
                       </button>
-
-                      {/* <!-- <p>or sign up with:</p> */}
-                      <a href="#" className="mx-2" role="button">
-                        <i className="fab fa-google light-blue-text"></i>
-                      </a>
-                      <a href="#" className="mx-2" role="button">
+                      {/* <FacebookLogin
+                        appId="472897187301660"
+                        autoLoad
+                        callback={responseFacebook}
+                        render={(renderProps) => (
+                          <a onClick={renderProps.onClick} className="mx-2" role="button">
                         <i className="fab fa-facebook-f light-blue-text"></i>
                       </a>
-                      <a href="#" className="mx-2" role="button">
+                        )}
+                      /> */}
+                      {/* <!-- <p>or sign up with:</p> */}
+                      <a
+                        className="mx-2"
+                        role="button"
+                        href="http://localhost:3000/auth/google"
+                      >
+                        <i className="fab fa-google light-blue-text"></i>
+                      </a>
+                      <a href="#/" className="mx-2" role="button">
+                        <i className="fab fa-facebook-f light-blue-text"></i>
+                      </a>
+                      <a href="#/" className="mx-2" role="button">
                         <i className="fab fa-linkedin-in light-blue-text"></i>
                       </a>
-                      <a href="#" className="mx-2" role="button">
+                      <a href="#/" className="mx-2" role="button">
                         <i className="fab fa-github light-blue-text"></i>
                       </a>
-
                       <hr />
-
                       <p>
                         By clicking
                         <em>Sign up</em> you agree to our
-                        <a href="#" target="_blank">
+                        <a href="#/" target="_blank">
                           terms of service
                         </a>
                       </p>
@@ -597,23 +614,14 @@ const Main = () => {
             </div>
           </div>
         </div>
-        <FeacherTeam/>
-        <OurAchievements/>
-        <AboutUs/>
-        <Testimonials/>
+
+        <FeacherTeam />
+        <OurAchievements />
+        <AboutUs />
+        <Testimonials />
         <Subscribe />
-        <FAQ/>
-        <ContactUs/>
-
-
-     
-
+        <FAQ />
       </main>
-      <script type="text/javascript" src="../public/js/jquery.js"></script>
-      <script type="text/javascript" src="../public/js/popper.js"></script>
-      <script type="text/javascript" src="../public/js/bootstrap.js"></script>
-      <script type="text/javascript" src="../public/js/mdb.js"></script>
-      <script src="/js/script.js"></script>
     </div>
   );
 };

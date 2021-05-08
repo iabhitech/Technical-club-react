@@ -1,6 +1,6 @@
 const FAQ =()=>(
     <div>
-           <a name="faqs"></a>
+           <a name="faqs" href="#/" style={{fontSize:"0.01px"}}>a</a>
         <div className="container my-5">
           <section>
             <h6 className="font-weight-normal text-uppercase font-small grey-text mb-4 text-center">

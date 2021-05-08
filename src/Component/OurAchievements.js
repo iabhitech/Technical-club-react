@@ -1,7 +1,7 @@
 const OurAchievements = () => (
   <div>
     {" "}
-    <a name="achievements"></a>
+    <a name="achievements" href="#/" style={{fontSize:"0.01px"}}>a</a>
     <div style={{ backgroundColor: "aliceblue" }}>
       <div className="container mt-5 py-5">
         <section className="dark-grey-text text-center">
@@ -75,7 +75,7 @@ const OurAchievements = () => (
                     <img
                       src="https://mdbootstrap.com/img/Photos/Others/project1.jpg"
                       className="img-fluid"
-                    />
+                    alt="Something Went Wrong"/>
                   </div>
                   <p className="text-center font-weight-bold text-muted my-4">
                     Volunteering at International Conference ETTA-2019
@@ -87,7 +87,7 @@ const OurAchievements = () => (
                     <img
                       src="https://mdbootstrap.com/img/Photos/Others/project8.jpg"
                       className="img-fluid"
-                    />
+                      alt="Something Went Wrong"/>
                   </div>
                   <p className="text-center font-weight-bold text-muted my-4">
                     Volunteering for various management tasks during FDPs held
@@ -100,7 +100,7 @@ const OurAchievements = () => (
                     <img
                       src="https://mdbootstrap.com/img/Photos/Others/project4.jpg"
                       className="img-fluid"
-                    />
+                      alt="Something Went Wrong"/>
                   </div>
                   <p className="text-center font-weight-bold text-muted my-4">
                     Technical events like coding competitions, quizzes and
@@ -117,7 +117,7 @@ const OurAchievements = () => (
                     <img
                       src="https://mdbootstrap.com/img/Photos/Others/project4.jpg"
                       className="img-fluid"
-                    />
+                      alt="Something Went Wrong"/>
                   </div>
                   <p className="text-center font-weight-bold text-muted my-4">
                     Technical events like coding competitions, quizzes and
@@ -134,7 +134,7 @@ const OurAchievements = () => (
                     <img
                       src="https://mdbootstrap.com/img/Photos/Others/project3.jpg"
                       className="img-fluid"
-                    />
+                      alt="Something Went Wrong" />
                   </div>
                   <p className="text-center font-weight-bold text-muted my-4">
                     Hindi Divas, Poster Making Events
@@ -146,7 +146,7 @@ const OurAchievements = () => (
                     <img
                       src="https://mdbootstrap.com/img/Photos/Others/project6.jpg"
                       className="img-fluid"
-                    />
+                      alt="Something Went Wrong" />
                   </div>
                   <p className="text-center font-weight-bold text-muted my-4">
                     Logo designing Events etc.
@@ -162,7 +162,7 @@ const OurAchievements = () => (
                     <img
                       src="https://mdbootstrap.com/img/Photos/Others/project1.jpg"
                       className="img-fluid"
-                    />
+                      alt="Something Went Wrong"/>
                   </div>
                   <p className="text-center font-weight-bold text-muted my-4">
                     Volunteering at International Conference ETTA-2019
@@ -174,7 +174,7 @@ const OurAchievements = () => (
                     <img
                       src="https://mdbootstrap.com/img/Photos/Others/project7.jpg"
                       className="img-fluid"
-                    />
+                      alt="Something Went Wrong"/>
                   </div>
                   <p className="text-center font-weight-bold text-muted my-4">
                     Volunteering at International Conference ETTA-2019

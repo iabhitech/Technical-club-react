@@ -15,7 +15,7 @@ const Testimonials=()=>(
               <img
                 src="https://mdbootstrap.com/img/Photos/Avatars/img%20(1).jpg"
                 className="rounded-circle z-depth-1 img-fluid"
-              />
+              alt="Something Went Wrong"/>
             </div>
             <h4 className="font-weight-bold dark-grey-text mt-4">
               Anna Deynah
@@ -44,7 +44,7 @@ const Testimonials=()=>(
               <img
                 src="https://mdbootstrap.com/img/Photos/Avatars/img%20(8).jpg"
                 className="rounded-circle z-depth-1 img-fluid"
-              />
+                alt="Something Went Wrong"/>
             </div>
             <h4 className="font-weight-bold dark-grey-text mt-4">
               John Doe
@@ -73,7 +73,7 @@ const Testimonials=()=>(
               <img
                 src="https://mdbootstrap.com/img/Photos/Avatars/img%20(10).jpg"
                 className="rounded-circle z-depth-1 img-fluid"
-              />
+                alt="Something Went Wrong"/>
             </div>
             <h4 className="font-weight-bold dark-grey-text mt-4">
               Maria Kate
