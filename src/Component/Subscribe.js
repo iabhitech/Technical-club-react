@@ -26,7 +26,6 @@ const Subscribe=({ user})=>(
               <input
                 type="email"
                 className="form-control"
-                placeholder="Enter your email address"
                 aria-label="Enter your email address"
                 aria-describedby="button-addon2"
                 value={user.userEmail|| localStorage.getItem('email')?user.userEmail?user.userEmail:localStorage.getItem('email'):""}
