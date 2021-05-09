@@ -1,9 +1,3 @@
-import FeacherTeam from "./FeacherTeam";
-import OurAchievements from "./OurAchievements";
-import AboutUs from "./AboutUs";
-import Testimonials from "./Testimonials";
-import Subscribe from "./Subscribe";
-import FAQ from "./FAQ";
 // import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import { useState } from "react";
 import Api from "../Api";
@@ -614,13 +608,6 @@ const Main = ({ userLoggedIn }) => {
             </div>
           </div>
         </div>
-
-        <FeacherTeam />
-        <OurAchievements />
-        <AboutUs />
-        <Testimonials />
-        <Subscribe />
-        <FAQ />
       </main>
     </div>
   );

@@ -6,6 +6,12 @@ import ContactUs from "./Component/ContactUs";
 import Form from "./Component/Form";
 import Provider from "./Context/provider";
 import Footer from "./Component/Footer";
+import FeacherTeam from "./Component/FeacherTeam";
+import OurAchievements from "./Component/OurAchievements";
+import AboutUs from "./Component/AboutUs";
+import Testimonials from "./Component/Testimonials";
+import Subscribe from "./Component/Subscribe";
+import FAQ from "./Component/FAQ";
 
 import { useState } from "react";
 
@@ -40,8 +46,14 @@ const App = () => {
         <NavBar user={user} userLoggedIn={userLoggedIn} lgShow={lgShow} openMembershipForm={openMembershipForm}/>
           <div>
             <Head />
-            <Header />
-            <Main userLoggedIn={userLoggedIn} />
+            <Header user={user}/>
+            {user.userRole.toString()===""&& !localStorage.getItem("fullName")?<Main userLoggedIn={userLoggedIn} />:""}
+            <FeacherTeam />
+        <OurAchievements />
+        <AboutUs />
+        <Testimonials />
+        <Subscribe user={user}/>
+        <FAQ />
             <ContactUs user={user} />
           </div>
           <Form lgShow={lgShow} openMembershipForm={openMembershipForm}/>

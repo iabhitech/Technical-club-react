@@ -1,4 +1,4 @@
-const Header = () => (
+const Header = ({ user}) => (
   <>
     <header>
       <div
@@ -42,9 +42,9 @@ const Header = () => (
                     their Ideas."
                   </strong>
                 </h6>
-                <a className="btn btn-white" href="#account">
+               {(user.userFullName?.toString()===""&& !localStorage.getItem("fullName"))? <a className="btn btn-white" href="#account">
                   Join Now
-                </a>
+                </a>:""}
                 <a className="btn btn-outline-white" href="#about-us">
                   Learn more
                 </a>

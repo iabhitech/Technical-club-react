@@ -106,7 +106,7 @@ const ContactUs = ({ user}) => {
                         }
                         disabled
                       />
-                      <label htmlFor="form-email">{!user.userEmail || !localStorage.getItem("email")? "" : "Last Name"}</label>
+                      <label htmlFor="form-email">{(user.userEmail || localStorage.getItem("email"))? "" : "Last Name"}</label>
                     </div>
 
                     <div className="md-form md-outline">

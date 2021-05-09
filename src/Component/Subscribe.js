@@ -1,4 +1,4 @@
-const Subscribe=()=>(
+const Subscribe=({ user})=>(
     <div className="bg-primary">
     <section className="container text-white p-5">
       <div className="row">
@@ -29,6 +29,8 @@ const Subscribe=()=>(
                 placeholder="Enter your email address"
                 aria-label="Enter your email address"
                 aria-describedby="button-addon2"
+                value={user.userEmail|| localStorage.getItem('email')?user.userEmail?user.userEmail:localStorage.getItem('email'):""}
+                disabled
               />
               <div className="input-group-append">
                 <button
