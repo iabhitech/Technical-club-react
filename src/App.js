@@ -10,12 +10,14 @@ import Footer from "./Component/Footer";
 import { useState } from "react";
 
 const App = () => {
+  const [lgShow, setLgShow] = useState(false);
+  const openMembershipForm=(value) => setLgShow(value)
+
   const [user, setUser] = useState({
     userEmail: "",
     userFullName: "",
     userId: "",
     userRole: "",
-    membershipForm: false,
   });
   const userLoggedIn = (name, value) => {
     setUser((prevState) => {
@@ -37,17 +39,14 @@ const App = () => {
       {/* {localStorage.clear()} */}
       {/* {console.log(localStorage)} */}
       <Provider>
-        <NavBar user={user} userLoggedIn={userLoggedIn} />
-        {!user.membershipForm ? (
+        <NavBar user={user} userLoggedIn={userLoggedIn} lgShow={lgShow} openMembershipForm={openMembershipForm}/>
           <div>
             <Head />
             <Header />
             <Main userLoggedIn={userLoggedIn} />
             <ContactUs user={user} />
           </div>
-        ) : (
-          <Form />
-        )}
+          <Form lgShow={lgShow} openMembershipForm={openMembershipForm}/>
         <Footer/>
       </Provider>
     </>
