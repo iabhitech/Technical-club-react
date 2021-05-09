@@ -1,4 +1,4 @@
-const NavBar = ({ user, userLoggedIn ,openMembershipForm}) => {
+const NavBar = ({ user, userLoggedIn, openMembershipForm }) => {
   const register = () => {
     document.getElementById("signIn").className = "tab-pane fade";
     document.getElementById("register").className = "tab-pane fade show active";
@@ -177,52 +177,70 @@ const NavBar = ({ user, userLoggedIn ,openMembershipForm}) => {
             )}
           </div>
           {user.userRole?.toString() === "Genral User" ||
-            (localStorage.getItem("token") &&
-              localStorage.getItem("role").toString() === "Genral User") ? (
-        <ul style={{disable:"block",marginTop:"10.5px"}}>
-          <li className="nav-item avatar dropdown " style={{ color: "white" }}>
-            <a
-              className="nav-link dropdown-toggle p-0 "
-              id="navbarDropdownMenuLink-55"
-              data-toggle="dropdown"
-              aria-expanded="false"
-              href="#/"
-              style={{ color: "white" }}
-            >
-              <img
-                src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
-                className="rounded-circle z-depth-0"
-                alt="User Profile"
-              />
-              <span
-                className="clearfix d-none d-sm-inline-block pr-2 text-white nav-link"
+          (localStorage.getItem("token") &&
+            localStorage.getItem("role").toString() === "Genral User") ? (
+            <ul style={{ disable: "block", marginTop: "10.5px" }}>
+              <li
+                className="nav-item avatar dropdown "
+                style={{ color: "white" }}
               >
-                {user.userFullName || localStorage.getItem("fullName")
-                  ? user.userFullName
-                    ? user.userFullName
-                    : localStorage.getItem("fullName")
-                  : ""}
-              </span>
-            </a>
-            <div
-              className="dropdown-menu dropdown-menu-lg-right p-2"
-              aria-labelledby="navbarDropdownMenuLink-55"
-            >
-              <a className="dropdown-item" href="#/" onClick={()=>openMembershipForm(true)}>
-                Apply For Membership
-              </a>
-              <a className="dropdown-item" href="#/">
-                Announcements
-              </a>
-              <a className="dropdown-item" href="#/">
-                Something else here
-              </a>
-              <a className="dropdown-item" href="#/">
-                Logout
-              </a>
-            </div>
-          </li>
-        </ul>):""}
+                <a
+                  className="nav-link dropdown-toggle p-0 "
+                  id="navbarDropdownMenuLink-55"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                  href="#/"
+                  style={{ color: "white" }}
+                >
+                  <img
+                    src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+                    className="rounded-circle z-depth-0"
+                    alt="User Profile"
+                  />
+                  <span className="clearfix d-none d-sm-inline-block pr-2 text-white nav-link">
+                    {user.userFullName || localStorage.getItem("fullName")
+                      ? user.userFullName
+                        ? user.userFullName
+                        : localStorage.getItem("fullName")
+                      : ""}
+                  </span>
+                </a>
+                <div
+                  className="dropdown-menu dropdown-menu-lg-right p-2"
+                  aria-labelledby="navbarDropdownMenuLink-55"
+                >
+                  <a
+                    className="dropdown-item"
+                    href="#/"
+                    onClick={() => openMembershipForm(true)}
+                  >
+                    Apply For Membership
+                  </a>
+                  <a className="dropdown-item" href="#/">
+                    Announcements
+                  </a>
+                  <a className="dropdown-item" href="#/">
+                    Something else here
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    href="#/"
+                    onClick={() => {
+                      localStorage.clear();
+                      userLoggedIn("userEmail","");
+                      userLoggedIn("userFullName","");
+                      userLoggedIn("userId","");
+                      userLoggedIn("userRole","");
+                    }}
+                  >
+                    Logout
+                  </a>
+                </div>
+              </li>
+            </ul>
+          ) : (
+            ""
+          )}
         </div>
       </nav>
     </div>

@@ -14,7 +14,7 @@ const ContactUs = ({ user}) => {
     const email = document.getElementById("form-email").value;
     e.preventDefault();
     const responce = await axios({
-      url: "http://localhost:3000/contact/mail",
+      url: "https://techclub-backend.herokuapp.com/contact/mail",
       data: qs.stringify({ subject, message, fullName, email }),
       headers: { "content-type": "application/x-www-form-urlencoded" },
       method: "POST",

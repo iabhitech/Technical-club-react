@@ -1,9 +1,36 @@
 import React, { useState } from "react";
 import { Button, Modal, Form, Col } from "react-bootstrap";
+import Api from "../Api/index";
 
-const FormMembership = ({lgShow,openMembershipForm}) => {
-  const [college, setCollege] = useState("REC KANNAUJ");
-
+const FormMembership = ({ lgShow, openMembershipForm }) => {
+  const [userDetails, setUserDetails] = useState({
+    gender: "Male",
+    teams: [],
+    collegeName: "REC KANNAUJ",
+    collegeYear: "First Year",
+    collegeBranch: "CSE",
+    collegeRollNumber: "",
+    collegeCity: "KANNAUJ",
+    collegeState: "UTTAR PRADESH",
+    collegeCityPinCode: "209732",
+    message: "",
+  });
+  const onClickOncheckBox = (checkboxName) => {
+    const teamExist = userDetails.teams.includes(checkboxName + " ");
+    if (teamExist) {
+      userDetails.teams = userDetails.teams.replace(checkboxName + " ", "");
+    } else {
+      userDetails.teams += checkboxName + " ";
+    }
+    setUserDetails((prev) => {
+      return { ...prev, teams: userDetails.teams };
+    });
+  };
+  const submitMemberForm = async (e) => {
+    e.preventDefault();
+    const response = await Api.submitMemberForm(userDetails);
+    console.log(response);
+  };
   return (
     <>
       <Modal
@@ -21,24 +48,42 @@ const FormMembership = ({lgShow,openMembershipForm}) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ backgroundColor: "rgb(242,248,254)" }}>
-          <Form>
+          <Form onSubmit={(e) => submitMemberForm(e)}>
             <Form.Group controlId="formGridAddress1">
               <Form.Label>College</Form.Label>
               <Form.Control
                 as="select"
                 className="mr-sm-2 rounded bg-light text-secoundry border-dark"
                 custom
-                onChange={(e) => setCollege(e.target.value)}
+                onChange={(e) =>
+                  setUserDetails((prev) => {
+                    return {
+                      ...prev,
+                      collegeName: e.target.value,
+                      collegeYear: "First Year",
+                      gender: "Male",
+                    };
+                  })
+                }
               >
                 <option value="REC KANNAUJ">REC KANNAUJ</option>
                 <option value="Other">Other</option>
               </Form.Control>
             </Form.Group>
-            {college.toString() === "REC KANNAUJ" ? (
+            {userDetails.collegeName.toString() === "REC KANNAUJ" ? (
               <Form.Row>
                 <Form.Group as={Col} controlId="reckStudentYear">
                   <Form.Label>Year</Form.Label>
-                  <Form.Control as="select" defaultValue="First Year" className="rounded bg-light text-secoundry border-dark">
+                  <Form.Control
+                    as="select"
+                    defaultValue="First Year"
+                    className="rounded bg-light text-secoundry border-dark"
+                    onChange={(e) =>
+                      setUserDetails((prev) => {
+                        return { ...prev, collegeYear: e.target.value };
+                      })
+                    }
+                  >
                     <option>First Year</option>
                     <option>Secound Year</option>
                     <option>Third Year</option>
@@ -46,8 +91,17 @@ const FormMembership = ({lgShow,openMembershipForm}) => {
                   </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col} controlId="reckStudentBranch">
-                  <Form.Label>Year</Form.Label>
-                  <Form.Control as="select" defaultValue="CSE" className="rounded bg-light text-secoundry border-dark">
+                  <Form.Label>Branch</Form.Label>
+                  <Form.Control
+                    as="select"
+                    defaultValue="CSE"
+                    className="rounded bg-light text-secoundry border-dark"
+                    onChange={(e) =>
+                      setUserDetails((prev) => {
+                        return { ...prev, collegeBranch: e.target.value };
+                      })
+                    }
+                  >
                     <option>CSE</option>
                     <option>ECE</option>
                     <option>EE</option>
@@ -56,20 +110,38 @@ const FormMembership = ({lgShow,openMembershipForm}) => {
                 </Form.Group>
                 <Form.Group as={Col} controlId="reckStudentRollNumber">
                   <Form.Label>Roll Number</Form.Label>
-                  <Form.Control type="number" placeholder="0000000000" className="rounded bg-light text-secoundry border-dark"/>
+                  <Form.Control
+                    type="number"
+                    placeholder="0000000000"
+                    className="rounded bg-light text-secoundry border-dark"
+                    onChange={(e) =>
+                      setUserDetails((prev) => {
+                        return { ...prev, collegeRollNumber: e.target.value };
+                      })
+                    }
+                  />
                 </Form.Group>
                 <Form.Group as={Col} controlId="reckStudentGender">
-                    <Form.Label>Gender</Form.Label>
-                    <Form.Control as="select" defaultValue="Male" className="rounded bg-light text-secoundry border-dark">
-                      <option>Male</option>
-                      <option>FeMale</option>
-                    </Form.Control>
-                  </Form.Group>
+                  <Form.Label>Gender</Form.Label>
+                  <Form.Control
+                    as="select"
+                    defaultValue="Male"
+                    className="rounded bg-light text-secoundry border-dark"
+                    onChange={(e) =>
+                      setUserDetails((prev) => {
+                        return { ...prev, gender: e.target.value };
+                      })
+                    }
+                  >
+                    <option>Male</option>
+                    <option>FeMale</option>
+                  </Form.Control>
+                </Form.Group>
               </Form.Row>
             ) : (
               ""
             )}
-            {college.toString() !== "REC KANNAUJ" ? (
+            {userDetails.collegeName.toString() !== "REC KANNAUJ" ? (
               <div>
                 {" "}
                 <Form.Group controlId="otherCollege">
@@ -80,17 +152,42 @@ const FormMembership = ({lgShow,openMembershipForm}) => {
                   >
                     Your College Name
                   </Form.Label>
-                  <Form.Control placeholder="IIT KANPUR" className=" rounded bg-light text-secoundry border-dark"/>
+                  <Form.Control
+                    placeholder="IIT KANPUR"
+                    className=" rounded bg-light text-secoundry border-dark"
+                    onChange={(e) =>
+                      setUserDetails((prev) => {
+                        return { ...prev, collegeName: e.target.value };
+                      })
+                    }
+                  />
                 </Form.Group>
                 <Form.Row>
                   <Form.Group as={Col} controlId="otherCity">
                     <Form.Label>College City</Form.Label>
-                    <Form.Control placeholder="KANPUR" className="rounded bg-light text-secoundry border-dark"/>
+                    <Form.Control
+                      placeholder="KANPUR"
+                      className="rounded bg-light text-secoundry border-dark"
+                      onChange={(e) =>
+                        setUserDetails((prev) => {
+                          return { ...prev, collegeCity: e.target.value };
+                        })
+                      }
+                    />
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="OtherState">
                     <Form.Label>State</Form.Label>
-                    <Form.Control as="select" defaultValue="UTTAR PRADESH" className="rounded bg-light text-secoundry border-dark">
+                    <Form.Control
+                      as="select"
+                      defaultValue="UTTAR PRADESH"
+                      className="rounded bg-light text-secoundry border-dark"
+                      onChange={(e) =>
+                        setUserDetails((prev) => {
+                          return { ...prev, collegeState: e.target.value };
+                        })
+                      }
+                    >
                       <option>UTTAR PRADESH</option>
                       <option>Andhra Pradesh</option>
                       <option>Arunachal Pradesh</option>
@@ -125,13 +222,33 @@ const FormMembership = ({lgShow,openMembershipForm}) => {
 
                   <Form.Group as={Col} controlId="otherPinCode">
                     <Form.Label>Pin Code College</Form.Label>
-                    <Form.Control placeholder="000 000" className="rounded bg-light text-secoundry border-dark"/>
+                    <Form.Control
+                      placeholder="000 000"
+                      className="rounded bg-light text-secoundry border-dark"
+                      onChange={(e) =>
+                        setUserDetails((prev) => {
+                          return {
+                            ...prev,
+                            collegeCityPinCode: e.target.value,
+                          };
+                        })
+                      }
+                    />
                   </Form.Group>
                 </Form.Row>
                 <Form.Row>
                   <Form.Group as={Col} controlId="otherStudentYear">
                     <Form.Label>Year</Form.Label>
-                    <Form.Control as="select" defaultValue="First Year" className="rounded bg-light text-secoundry border-dark">
+                    <Form.Control
+                      as="select"
+                      defaultValue="First Year"
+                      className="rounded bg-light text-secoundry border-dark"
+                      onChange={(e) =>
+                        setUserDetails((prev) => {
+                          return { ...prev, collegeYear: e.target.value };
+                        })
+                      }
+                    >
                       <option>First Year</option>
                       <option>Secound Year</option>
                       <option>Third Year</option>
@@ -140,15 +257,45 @@ const FormMembership = ({lgShow,openMembershipForm}) => {
                   </Form.Group>
                   <Form.Group as={Col} controlId="otherStudentBranch">
                     <Form.Label>Branch</Form.Label>
-                    <Form.Control type="text" placeholder="CSE" className="rounded bg-light text-secoundry border-dark"/>
+                    <Form.Control
+                      type="text"
+                      placeholder="CSE"
+                      className="rounded bg-light text-secoundry border-dark"
+                      onChange={(e) =>
+                        setUserDetails((prev) => {
+                          return { ...prev, collegeBranch: e.target.value };
+                        })
+                      }
+                    />
                   </Form.Group>
                   <Form.Group as={Col} controlId="otherStudentRollNumber">
                     <Form.Label>Roll Number</Form.Label>
-                    <Form.Control type="number" placeholder="0000000000" className="rounded bg-light text-secoundry border-dark"/>
+                    <Form.Control
+                      type="number"
+                      placeholder="0000000000"
+                      className="rounded bg-light text-secoundry border-dark"
+                      onChange={(e) =>
+                        setUserDetails((prev) => {
+                          return { ...prev, collegeRollNumber: e.target.value };
+                        })
+                      }
+                    />
                   </Form.Group>
                   <Form.Group as={Col} controlId="otherStudentGender">
                     <Form.Label>Gender</Form.Label>
-                    <Form.Control as="select" defaultValue="Male" className="rounded bg-light text-secoundry border-dark">
+                    <Form.Control
+                      as="select"
+                      defaultValue="Male"
+                      className="rounded bg-light text-secoundry border-dark"
+                      onChange={(e) =>
+                        setUserDetails((prev) => {
+                          return {
+                            ...prev,
+                            gender: e.target.value,
+                          };
+                        })
+                      }
+                    >
                       <option>Male</option>
                       <option>FeMale</option>
                     </Form.Control>
@@ -160,18 +307,45 @@ const FormMembership = ({lgShow,openMembershipForm}) => {
             )}
             <Form.Group>
               <Form.Label>Choose Teams That You wanna Join</Form.Label>
-              <Form.Row style={{border:"1px solid #000"}} className="rounded bg-light text-secoundry border-dark">
-                <Form.Group as={Col} controlId="formGridCheckbox1"  className="">
-                  <Form.Check type="checkbox" label="Technical Team" className="text-center text-secoundry ml-2 mb-0" style={{display:"block" ,marginTop:"8px"}}/>
+              <Form.Row
+                style={{ border: "1px solid #000" }}
+                className="rounded bg-light text-secoundry border-dark"
+              >
+                <Form.Group as={Col} controlId="formGridCheckbox1" className="">
+                  <Form.Check
+                    type="checkbox"
+                    label="Technical Team"
+                    className="text-center text-secoundry ml-2 mb-0"
+                    style={{ display: "block", marginTop: "8px" }}
+                    onClick={(e) => onClickOncheckBox("Technical-Team")}
+                  />
                 </Form.Group>
-                <Form.Group as={Col} controlId="formGridCheckbox2" >
-                  <Form.Check type="checkbox" label="Documentation Team" className="text-center text-secoundry mt-2 ml-2" style={{disable:"block"}}/>
+                <Form.Group as={Col} controlId="formGridCheckbox2">
+                  <Form.Check
+                    type="checkbox"
+                    label="Documentation Team"
+                    className="text-center text-secoundry mt-2 ml-2"
+                    style={{ disable: "block" }}
+                    onClick={(e) => onClickOncheckBox("Documentation-Team")}
+                  />
                 </Form.Group>
-                <Form.Group as={Col} controlId="formGridCheckbox3" >
-                  <Form.Check type="checkbox" label="Management Team" className="text-center text-secoundry mt-2 ml-2" style={{disable:"block"}}/>
+                <Form.Group as={Col} controlId="formGridCheckbox3">
+                  <Form.Check
+                    type="checkbox"
+                    label="Management Team"
+                    className="text-center text-secoundry mt-2 ml-2"
+                    style={{ disable: "block" }}
+                    onClick={(e) => onClickOncheckBox("Management-Team")}
+                  />
                 </Form.Group>
-                <Form.Group as={Col} controlId="formGridCheckbox4" >
-                  <Form.Check type="checkbox" label="Designing Team" className="text-center text-secoundry mt-2 ml-2" style={{disable:"block"}}/>
+                <Form.Group as={Col} controlId="formGridCheckbox4">
+                  <Form.Check
+                    type="checkbox"
+                    label="Designing Team"
+                    className="text-center text-secoundry mt-2 ml-2"
+                    style={{ disable: "block" }}
+                    onClick={(e) => onClickOncheckBox("Designing-Team")}
+                  />
                 </Form.Group>
               </Form.Row>
             </Form.Group>
@@ -182,6 +356,14 @@ const FormMembership = ({lgShow,openMembershipForm}) => {
                 rows={2}
                 placeholder="This would Effect to Your Selection"
                 className="rounded bg-light text-secoundry border-dark"
+                onChange={(e) =>
+                  setUserDetails((prev) => {
+                    return {
+                      ...prev,
+                      message: e.target.value,
+                    };
+                  })
+                }
               />
             </Form.Group>
             <Form.Group controlId="whyJoinYou">
@@ -192,7 +374,7 @@ const FormMembership = ({lgShow,openMembershipForm}) => {
                 lang="en"
                 className="rounded btn ml-4 border-dark border-bottom-dark"
                 custom
-                style={{color:"#0275d8",width:"79px"}}
+                style={{ color: "#0275d8", width: "79px" }}
               />
             </Form.Group>
             <Button variant="primary" type="submit">

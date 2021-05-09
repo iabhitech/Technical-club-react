@@ -7,7 +7,7 @@ import qs from "qs";
  * @param {"GET"|"POST"} [method="GET"]
  */
 
-const headers= { "content-type": "application/x-www-form-urlencoded" };
+const headers= { "content-type": "application/x-www-form-urlencoded" ,'authorization': localStorage.getItem('token')};
 
 
 const callApi =async (url,data=null,method="GET") =>{
@@ -27,12 +27,13 @@ const callApi =async (url,data=null,method="GET") =>{
     
 }
 const Api={
-    login:(data)=>callApi("http://localhost:3000/login/email",data,"POST"),
-    registerNow:(data)=>callApi("http://localhost:3000/signup/postotp",data,"POST"),
-    registerOtpSubmit:(data)=>callApi("http://localhost:3000/signup/confirmpostotp",data,"POST"),
-    forgetOtpSubmit:(data)=>callApi("http://localhost:3000/signup/forgetotp",data,"POST"),
-    submitForgetOtp:(data)=>callApi("http://localhost:3000/signup/submitforgetotp",data,"POST"),
-    forgetPasswordSubmit:(data)=>callApi("http://localhost:3000/signup/submitforgetpassword",data,"POST")
+    login:(data)=>callApi(`https://techclub-backend.herokuapp.com/login/email`,data,"POST"),
+    registerNow:(data)=>callApi(`https://techclub-backend.herokuapp.com/signup/postotp`,data,"POST"),
+    registerOtpSubmit:(data)=>callApi(`https://techclub-backend.herokuapp.com/signup/confirmpostotp`,data,"POST"),
+    forgetOtpSubmit:(data)=>callApi(`https://techclub-backend.herokuapp.com/signup/forgetotp`,data,"POST"),
+    submitForgetOtp:(data)=>callApi(`https://techclub-backend.herokuapp.com/signup/submitforgetotp`,data,"POST"),
+    forgetPasswordSubmit:(data)=>callApi(`https://techclub-backend.herokuapp.com/signup/submitforgetpassword`,data,"POST"),
+    submitMemberForm:(data)=>callApi(`https://techclub-backend.herokuapp.com/genraluser/submit/form`,data,"POST")
 }
 
 export default Api;

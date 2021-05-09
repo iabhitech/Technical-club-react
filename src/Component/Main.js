@@ -317,7 +317,7 @@ const Main = ({ userLoggedIn }) => {
                       <a
                         className="mx-2"
                         role="button"
-                        href="http://localhost:3000/auth/google"
+                        href="https://techclub-backend.herokuapp.com/auth/google"
                       >
                         <i className="fab fa-google light-blue-text"></i>
                       </a>
@@ -586,7 +586,7 @@ const Main = ({ userLoggedIn }) => {
                       <a
                         className="mx-2"
                         role="button"
-                        href="http://localhost:3000/auth/google"
+                        href="https://techclub-backend.herokuapp.com/auth/google"
                       >
                         <i className="fab fa-google light-blue-text"></i>
                       </a>

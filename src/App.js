@@ -36,8 +36,6 @@ const App = () => {
   };
   return (
     <>
-      {/* {localStorage.clear()} */}
-      {/* {console.log(localStorage)} */}
       <Provider>
         <NavBar user={user} userLoggedIn={userLoggedIn} lgShow={lgShow} openMembershipForm={openMembershipForm}/>
           <div>
