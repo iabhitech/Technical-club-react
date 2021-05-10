@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import { Button, Modal, Form, Col } from "react-bootstrap";
 import Api from "../Api/index";
 
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import constants from "../config/constants"
+
 const FormMembership = ({ lgShow, openMembershipForm }) => {
   const [userDetails, setUserDetails] = useState({
     gender: "Male",
@@ -28,8 +33,16 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
   };
   const submitMemberForm = async (e) => {
     e.preventDefault();
-    const response = await Api.submitMemberForm(userDetails);
-    console.log(response);
+      const response = await Api.submitMemberForm(userDetails);
+      console.log(response);
+      if(response.code===500){
+        toast.error('🦄 SomeThink Went Wrong', constants.tostObject);
+      }else if(response.code===200){
+        toast.success('🦄 Request Sent Successfully', constants.tostObject);
+      }
+      else {
+        toast.warn('🦄 User is Unauthorized', constants.tostObject);
+      }
   };
   return (
     <>
@@ -350,7 +363,7 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
               </Form.Row>
             </Form.Group>
             <Form.Group controlId="whyJoinYou">
-              <Form.Label>Why Should be Join You</Form.Label>
+              <Form.Label>Why Should we Join You</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={2}
@@ -380,6 +393,7 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
             <Button variant="primary" type="submit">
               Submit
             </Button>
+            <ToastContainer/>
           </Form>
         </Modal.Body>
       </Modal>
