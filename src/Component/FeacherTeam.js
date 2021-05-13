@@ -1,4 +1,4 @@
-const FeacherTeam = ({ user }) => (
+const FeacherTeam = ({ user,openMembershipForm }) => (
   <div>
     <a name="teams" href="#/" style={{ fontSize: "0.01px" }}>
       a
@@ -20,13 +20,16 @@ const FeacherTeam = ({ user }) => (
             (
               user.userRole?.toString() === "Genral User" ||
               localStorage.getItem("role")
-            )?.toString() === "Genral User" ? (
+            ?.toString() === "Genral User" )? (
               <a
                 className="btn btn-info btn-md ml-0 mb-5"
                 href="#account"
                 role="button"
+                onClick={()=>{
+                  (user.userFullName || localStorage.getItem("token"))&& openMembershipForm(true)
+                }}
               >
-                Join your Team<i className="fa fa-magic ml-2"></i>
+                Join your Teams<i className="fa fa-magic ml-2"></i>
               </a>
             ) : (
               ""

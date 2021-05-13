@@ -98,7 +98,6 @@ const ContactUs = ({ user}) => {
                         type="email"
                         id="form-email"
                         className="form-control"
-                        placeholder="Enter your email"
                         value={
                           user.userEmail || localStorage.getItem('email')
                             ? user.userEmail?user.userEmail: localStorage.getItem('email')
@@ -106,7 +105,7 @@ const ContactUs = ({ user}) => {
                         }
                         disabled
                       />
-                      <label htmlFor="form-email">{(user.userEmail || localStorage.getItem("email"))? "" : "Last Name"}</label>
+                      <label htmlFor="form-email">{user.userEmail || localStorage.getItem("email")? "" : "Email"}</label>
                     </div>
 
                     <div className="md-form md-outline">

@@ -48,7 +48,7 @@ const App = () => {
             <Head />
             <Header user={user}/>
             {user.userRole.toString()===""&& !localStorage.getItem("fullName")?<Main userLoggedIn={userLoggedIn} />:""}
-            <FeacherTeam user={user}/>
+            <FeacherTeam user={user} openMembershipForm={openMembershipForm}/>
         <OurAchievements />
         <AboutUs />
         <Testimonials />

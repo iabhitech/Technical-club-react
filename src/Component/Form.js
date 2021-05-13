@@ -33,6 +33,7 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
   };
   const submitMemberForm = async (e) => {
     e.preventDefault();
+    document.getElementById("form-submit-button-membership").disabled = true;
       const response = await Api.submitMemberForm(userDetails);
       console.log(response);
       if(response.code===500){
@@ -390,7 +391,7 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
                 style={{ color: "#0275d8", width: "79px" }}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" id="form-submit-button-membership">
               Submit
             </Button>
             <ToastContainer/>
