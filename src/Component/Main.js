@@ -73,9 +73,11 @@ const Main = ({ userLoggedIn }) => {
     } else if (
       response.toString() === "Your Password and Confirm Password are not Match"
     ) {
+      document.getElementById("defaultRegisterbutton").disabled= false;
       document.getElementById("defaultpassworcheckblock").innerText =
         "Your Password and Confirm Password are not Match";
     } else if (response.toString() === "Your Password is not correct") {
+      document.getElementById("defaultRegisterbutton").disabled= false;
       document.getElementById("defaultpassworcheckblock").innerText =
         "Your Password is not correct we need your password in otp varification";
     }
@@ -90,9 +92,11 @@ const Main = ({ userLoggedIn }) => {
     if (response.message.toString() === "Otp is not correct") {
       document.getElementById("defaultOtpHelpBlock").innerText =
         "Otp is not correct";
+        document.getElementById("registerButton").disabled =false;
     } else if (response.message.toString() === "No User Found") {
       document.getElementById("defaultOtpHelpBlock").innerText =
         "No User Found with this email";
+        document.getElementById("registerButton").disabled =false;
     } else if (response.message.toString() === "Otp Match successfully") {
       document.getElementById("defaultOtpHelpBlock").innerText =
         "Your Account is Created";
@@ -109,6 +113,7 @@ const Main = ({ userLoggedIn }) => {
   };
   const loginSubmit = async (e) => {
     e.preventDefault();
+    document.getElementById("SignInFormButton").disabled=true;
     const response = await Api.login(LoginFormData);
     if (response.message.toString() === "Your Password is Correct") {
       document.getElementById("defaultsignninHelpBlock").innerText =
@@ -127,13 +132,16 @@ const Main = ({ userLoggedIn }) => {
     ) {
       document.getElementById("defaultsignninHelpBlock").innerText =
         "No User Exist with this Email";
+        document.getElementById("SignInFormButton").disabled=false;
     } else if (response.message?.toString() === "No User Found") {
       document.getElementById("defaultOtpHelpBlock").innerText =
         "No User Found with this email";
+        document.getElementById("SignInFormButton").disabled=false;
     }
   };
   const forgetOtpSubmit = async (e) => {
     e.preventDefault();
+    document.getElementById("defaultforgetformbutton").disabled=true;
     const response = await Api.forgetOtpSubmit({ email: forgetEmail });
     if (response.toString() === "Otp Send successfully") {
       console.log("otp send successfully");
@@ -143,6 +151,7 @@ const Main = ({ userLoggedIn }) => {
     } else if (response.toString() === "No User Found with this Email") {
       document.getElementById("defaultregisterformHelpBlock").innerText =
         "No User Found with this Email";
+        document.getElementById("defaultforgetformbutton").disabled=false;
     }
   };
   const submitForgetOtp = async (e) => {
@@ -157,15 +166,16 @@ const Main = ({ userLoggedIn }) => {
       document.getElementById(
         "defaultregisterformOtpHelpBlock"
       ).innerText = `Otp not Match`;
+      document.getElementById("defaultforgetpasswordbutton").disabled = false;
     } else {
       document.getElementById(
         "defaultregisterformOtpHelpBlock"
       ).innerText = `No User Found with this Email`;
+      document.getElementById("defaultforgetpasswordbutton").disabled = false;
     }
   };
   const forgetPasswordSubmit = async (e) => {
     e.preventDefault();
-    document.getElementById("defaultpasswordforgetformbutton").disabled= true;
     const response = await Api.forgetPasswordSubmit({
       email: forgetEmail,
       otp: forgetOtp,
@@ -296,6 +306,7 @@ const Main = ({ userLoggedIn }) => {
                         className="btn btn-info btn-block my-4"
                         type="submit"
                         onClick={loginSubmit}
+                        id="SignInFormButton"
                       >
                         Sign in
                       </button>

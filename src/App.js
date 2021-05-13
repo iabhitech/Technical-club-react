@@ -1,4 +1,3 @@
-import Head from "./Component/Head";
 import Header from "./Component/Header";
 import NavBar from "./Component/Nav";
 import Main from "./Component/Main";
