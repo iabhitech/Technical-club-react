@@ -54,6 +54,7 @@ const Main = ({ userLoggedIn }) => {
   };
   const registerNow = async (e) => {
     e.preventDefault();
+    document.getElementById("defaultRegisterbutton").disabled= true;
     const response = await Api.registerNow(dataRegistrationForm);
     if (
       response.toString() === "Otp Send successfully" ||
@@ -81,6 +82,7 @@ const Main = ({ userLoggedIn }) => {
   };
   const registerOtpSubmit = async (e) => {
     e.preventDefault();
+    document.getElementById("registerButton").disabled =true;
     const response = await Api.registerOtpSubmit({
       ...dataRegistrationForm,
       otp,
@@ -145,6 +147,7 @@ const Main = ({ userLoggedIn }) => {
   };
   const submitForgetOtp = async (e) => {
     e.preventDefault();
+    document.getElementById("defaultforgetpasswordbutton").disabled = true;
     const response = await Api.submitForgetOtp({ email: forgetEmail, otp: forgetOtp });
     if (response.toString() === `Otp Match successfully`) {
       document.getElementById("userforgetpasswordOTP").disabled = true;
@@ -162,6 +165,7 @@ const Main = ({ userLoggedIn }) => {
   };
   const forgetPasswordSubmit = async (e) => {
     e.preventDefault();
+    document.getElementById("defaultpasswordforgetformbutton").disabled= true;
     const response = await Api.forgetPasswordSubmit({
       email: forgetEmail,
       otp: forgetOtp,
