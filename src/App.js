@@ -44,8 +44,7 @@ const App = () => {
     <>
       <Provider>
         <NavBar user={user} userLoggedIn={userLoggedIn} lgShow={lgShow} openMembershipForm={openMembershipForm}/>
-          <div>
-            <Head />
+          <main className="mt-0">
             <Header user={user}/>
             {user.userRole.toString()===""&& !localStorage.getItem("fullName")?<Main userLoggedIn={userLoggedIn} />:""}
             <FeacherTeam user={user} openMembershipForm={openMembershipForm}/>
@@ -55,7 +54,7 @@ const App = () => {
         <Subscribe user={user}/>
         <FAQ />
             <ContactUs user={user} />
-          </div>
+          </main>
           <Form lgShow={lgShow} openMembershipForm={openMembershipForm}/>
         <Footer/>
       </Provider>
