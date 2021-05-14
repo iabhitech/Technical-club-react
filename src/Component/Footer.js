@@ -111,7 +111,7 @@ const Footer=()=>(
             <i className="fas fa-phone mr-3"></i> +91 88002 18506
           </li>
           <li>
-            <i className="fas fa-print mr-3"></i> +91 88002 18506
+            <i className="fas fa-print mr-3"></i> +91 75056 17553
           </li>
         </ul>
         

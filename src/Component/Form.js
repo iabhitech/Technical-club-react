@@ -123,7 +123,7 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
                   </Form.Control>
                 </Form.Group>
                 <Form.Group as={Col} controlId="reckStudentRollNumber">
-                  <Form.Label>Roll Number</Form.Label>
+                  <Form.Label>Roll No</Form.Label>
                   <Form.Control
                     type="number"
                     placeholder="0000000000"

@@ -172,7 +172,9 @@ nav a:hover {
 }
 /* correcting bootstrap dropdown in small device */
 .avatar.dropdown .dropdown-menu{
-  width: min-content; right: 0;left: inherit;
+  width: min-content; 
+  /* right: 0; */
+  left: inherit;
 }
 
 
