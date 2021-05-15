@@ -320,7 +320,7 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
               ""
             )}
             <Form.Group>
-              <Form.Label>Choose Teams That You wanna Join</Form.Label>
+              <Form.Label>Choose Teams You want to Join</Form.Label>
               <Form.Row
                 style={{ border: "1px solid #000" }}
                 className="rounded bg-light text-secoundry border-dark"
@@ -368,7 +368,7 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
               <Form.Control
                 as="textarea"
                 rows={2}
-                placeholder="This would Effect to Your Selection"
+                placeholder="This willEeffect Your selection"
                 className="rounded bg-light text-secoundry border-dark"
                 onChange={(e) =>
                   setUserDetails((prev) => {

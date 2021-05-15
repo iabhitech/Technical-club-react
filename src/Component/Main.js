@@ -556,7 +556,7 @@ const Main = ({ userLoggedIn }) => {
                           id="defaultOtpHelpBlock"
                           className="form-text text-muted mb-4"
                         >
-                          Enter 4 digit code that we will sendon your Email
+                           Enter 4 digit otp sent on your Mail
                         </small>
                         <button
                           className="btn btn-info my-4 btn-block waves-effect waves-light"

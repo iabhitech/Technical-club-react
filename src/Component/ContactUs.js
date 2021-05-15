@@ -71,7 +71,7 @@ const ContactUs = ({ user}) => {
                             disabled
                           />
                           <label htmlFor="form-first-name">
-                          {user.userFullName || localStorage.getItem("fullName")? "" : "Last Name"}
+                          {user.userFullName || localStorage.getItem("fullName")? "" : "First Name"}
                           </label>
                         </div>
                       </div>
