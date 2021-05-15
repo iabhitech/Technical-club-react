@@ -368,7 +368,7 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
               <Form.Control
                 as="textarea"
                 rows={2}
-                placeholder="This willEeffect Your selection"
+                placeholder="This will affect Your selection"
                 className="rounded bg-light text-secoundry border-dark"
                 onChange={(e) =>
                   setUserDetails((prev) => {
