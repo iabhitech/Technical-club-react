@@ -7,10 +7,6 @@ import qs from "qs";
  * @param {"GET"|"POST"} [method="GET"]
  */
 
-const headers = {
-  "content-type": "application/x-www-form-urlencoded",
-  "authorization": localStorage.getItem("token")
-};
 
 const callApi = async (url, data = null, method = "GET") => {
   try {
@@ -18,8 +14,10 @@ const callApi = async (url, data = null, method = "GET") => {
       url,
       data: qs.stringify(data),
       method,
-      headers,
-    });
+      headers : {
+        "content-type": "application/x-www-form-urlencoded",
+        "authorization": localStorage.getItem("token")
+      }   });
     return response.data;
   } catch (err) {
     console.log(err);

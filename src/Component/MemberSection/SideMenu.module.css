@@ -1,0 +1,11 @@
+.sidemenuelement {
+  font-size: 25px;
+  line-height: 2.71;
+  text-decoration: wavy;
+}
+.sidemenuelement:hover{
+ background-color: rgb(92, 179, 255);
+}
+.active{
+  background-color: rgb(92, 179, 255);
+}

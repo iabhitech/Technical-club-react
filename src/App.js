@@ -11,7 +11,10 @@ import AboutUs from "./Component/AboutUs";
 import Testimonials from "./Component/Testimonials";
 import Subscribe from "./Component/Subscribe";
 import FAQ from "./Component/FAQ";
-
+import Dashboard from "./Component/MemberSection/Dashboard"
+import Main2 from "./Component/MemberSection/Main"
+import LoboSection from "./Component/MemberSection/LoboSection";
+import SideMenu from "./Component/MemberSection/SideMenu"
 import { useState } from "react";
 
 const App = () => {
@@ -56,6 +59,10 @@ const App = () => {
           </main>
           <Form lgShow={lgShow} openMembershipForm={openMembershipForm}/>
         <Footer/>
+        {/* <Dashboard/> */}
+        {/* <Main2/> */}
+        {/* <LoboSection/>
+        <SideMenu/> */}
       </Provider>
     </>
   );
