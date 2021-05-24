@@ -1,5 +1,9 @@
 .memberprofile{
-    border: 1px solid rgb(5, 1, 255);
-    background-color: rgb(169, 193, 245);
+    border: 1px solid rgb(40, 63, 102);
     border-radius: 4px;
+}
+.forminputtag{
+    width: 70%;
+    border: 1px solid rgb(40, 63, 102);
+    border-left: 1px solid rgb(40, 63, 102);
 }

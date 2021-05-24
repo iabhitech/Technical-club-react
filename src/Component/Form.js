@@ -235,7 +235,7 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
                   </Form.Group>
 
                   <Form.Group as={Col} controlId="otherPinCode">
-                    <Form.Label>Pin Code College</Form.Label>
+                    <Form.Label>Pin College</Form.Label>
                     <Form.Control
                       placeholder="000 000"
                       className="rounded bg-light text-secoundry border-dark"
@@ -283,7 +283,7 @@ const FormMembership = ({ lgShow, openMembershipForm }) => {
                     />
                   </Form.Group>
                   <Form.Group as={Col} controlId="otherStudentRollNumber">
-                    <Form.Label>Roll Number</Form.Label>
+                    <Form.Label>Roll No</Form.Label>
                     <Form.Control
                       type="number"
                       placeholder="0000000000"
