@@ -7,3 +7,9 @@
     border: 1px solid rgb(40, 63, 102);
     border-left: 1px solid rgb(40, 63, 102);
 }
+.inputgroup:focus{
+    outline: none !important;
+    box-shadow: none !important;  
+    }
+
+    
