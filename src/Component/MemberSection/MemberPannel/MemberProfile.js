@@ -5,7 +5,7 @@ import style from "./memberprofile.module.css";
 const MemberProfile = () => {
   return (
     <Container>
-      <Alert variant="secondary">
+      <Alert style={{backgroundColor:"rgb(247,247,247)"}}>
         <h5 className="text-center">Your Profile</h5>
       </Alert>
       <Row className="d-flex justify-content-center">
