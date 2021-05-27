@@ -44,7 +44,7 @@ const App = () => {
   return (
     <>
       <Provider>
-        {/* <NavBar user={user} userLoggedIn={userLoggedIn} lgShow={lgShow} openMembershipForm={openMembershipForm}/>
+        <NavBar user={user} userLoggedIn={userLoggedIn} lgShow={lgShow} openMembershipForm={openMembershipForm}/>
           <main className="mt-0">
             <Header user={user}/>
             {user.userRole.toString()===""&& !localStorage.getItem("fullName")?<Main userLoggedIn={userLoggedIn} />:""}
@@ -57,8 +57,8 @@ const App = () => {
             <ContactUs user={user} />
           </main>
           <Form lgShow={lgShow} openMembershipForm={openMembershipForm}/>
-        <Footer/> */}
-       <SideMenu/>
+        <Footer/>
+       {/* <SideMenu/> */}
       </Provider>
     </>
   );
