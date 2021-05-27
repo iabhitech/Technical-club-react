@@ -12,13 +12,13 @@ import Testimonials from "./Component/Testimonials";
 import Subscribe from "./Component/Subscribe";
 import FAQ from "./Component/FAQ";
 
-import SideMenu from "./Component/MemberSection/SideMenu"
+import SideMenu from "./Component/MemberSection/SideMenu";
 
 import { useState } from "react";
 
 const App = () => {
   const [lgShow, setLgShow] = useState(false);
-  const openMembershipForm=(value) => setLgShow(value)
+  const openMembershipForm = (value) => setLgShow(value);
 
   const [user, setUser] = useState({
     userEmail: "",
@@ -44,21 +44,25 @@ const App = () => {
   return (
     <>
       <Provider>
-        <NavBar user={user} userLoggedIn={userLoggedIn} lgShow={lgShow} openMembershipForm={openMembershipForm}/>
-          <main className="mt-0">
-            <Header user={user}/>
-            {user.userRole.toString()===""&& !localStorage.getItem("fullName")?<Main userLoggedIn={userLoggedIn} />:""}
-            <FeacherTeam user={user} openMembershipForm={openMembershipForm}/>
-        <OurAchievements />
-        <AboutUs />
-        <Testimonials />
-        <Subscribe user={user}/>
-        <FAQ />
-            <ContactUs user={user} />
-          </main>
-          <Form lgShow={lgShow} openMembershipForm={openMembershipForm}/>
-        <Footer/>
-       {/* <SideMenu/> */}
+        <NavBar user={user} userLoggedIn={userLoggedIn} lgShow={lgShow} openMembershipForm={openMembershipForm} />
+        {/* <main className="mt-0">
+          <Header user={user} />
+          {user.userRole.toString() === "" && !localStorage.getItem("fullName") ? (
+            <Main userLoggedIn={userLoggedIn} />
+          ) : (
+            ""
+          )}
+          <FeacherTeam user={user} openMembershipForm={openMembershipForm} />
+          <OurAchievements />
+          <AboutUs />
+          <Testimonials />
+          <Subscribe user={user} />
+          <FAQ />
+          <ContactUs user={user} />
+        </main> */}
+        {/* <Form lgShow={lgShow} openMembershipForm={openMembershipForm} /> */}
+        {/* <Footer /> */}
+        <SideMenu />
       </Provider>
     </>
   );

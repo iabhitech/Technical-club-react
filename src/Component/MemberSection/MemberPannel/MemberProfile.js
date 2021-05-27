@@ -1,11 +1,11 @@
-import { Col, Row, Container, Alert, Image, Form } from "react-bootstrap";
+import { Col, Row, Alert, Image, Form } from "react-bootstrap";
 import { BsPen } from "react-icons/bs";
 
 import style from "./memberprofile.module.css";
 const MemberProfile = () => {
   return (
-    <Container>
-      <Alert style={{backgroundColor:"rgb(247,247,247)"}}>
+    <div className="card card-body">
+      <Alert style={{ backgroundColor: "rgb(247,247,247)" }}>
         <h5 className="text-center">Your Profile</h5>
       </Alert>
       <Row className="d-flex justify-content-center">
@@ -25,42 +25,38 @@ const MemberProfile = () => {
       </Row>
       <hr className="hr-dark" />
       <Row>
-        <Col md={1}>
-          <h5 className="text-primary pt-2">Name</h5>
+        <Col md={2} lg={1}>
+          <h6 className="text-primary pt-2">Name</h6>
         </Col>
-        <Col md={10} className="pf-0 pr-0 ml-0 mr-0">
+        <Col md={9} lg={8}>
           <Form>
             <Form.Control
               placeholder="Jack ryder"
-              className={
-                "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-4 " +
-                style.inputgroup
-              }
+              className={"border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-4 " + style.inputgroup}
             />
           </Form>
         </Col>
-        <Col md={1}>
+        <Col md={2} lg={1}>
           <BsPen />
         </Col>
       </Row>
       <br />
       <Form>
         <Row>
-          <Col md={1}>
-            <h5 className="text-primary pt-2">Email</h5>
+          <Col md={2} lg={1}>
+            <h6 className="text-primary pt-2">Email</h6>
           </Col>
-          <Col md={10}>
+          <Col md={9} lg={10}>
             <Form.Control
               placeholder="test@test.com"
               disabled
               value="test@test.com"
               className={
-                "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-4 bg-white " +
-                style.inputgroup
+                "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-4 bg-white " + style.inputgroup
               }
             />
           </Col>
-          <Col md={1}>
+          <Col md={2} lg={1}>
             <BsPen />
           </Col>
         </Row>
@@ -71,14 +67,13 @@ const MemberProfile = () => {
           <Col md={6}>
             <Row>
               <Col md={2}>
-                <h5 className="text-primary pt-2">Branch</h5>
+                <h6 className="text-primary pt-2">Branch</h6>
               </Col>
               <Col md={8}>
                 <Form.Control
                   placeholder="Your Branch"
                   className={
-                    "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-4 " +
-                    style.inputgroup
+                    "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-4 " + style.inputgroup
                   }
                 />
               </Col>
@@ -90,14 +85,13 @@ const MemberProfile = () => {
           <Col md={6}>
             <Row>
               <Col md={2}>
-                <h5 className="text-primary pt-2">Year</h5>
+                <h6 className="text-primary pt-2">Year</h6>
               </Col>
               <Col md={8}>
                 <Form.Control
                   placeholder="Your Year"
                   className={
-                    "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-4 " +
-                    style.inputgroup
+                    "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-4 " + style.inputgroup
                   }
                 />
               </Col>
@@ -114,7 +108,7 @@ const MemberProfile = () => {
           <Form>
             <Row>
               <Col md={2}>
-                <h5 className="text-primary pt-2">Position</h5>
+                <h6 className="text-primary pt-2">Position</h6>
               </Col>
               <Col md={8}>
                 <Form.Control
@@ -122,8 +116,7 @@ const MemberProfile = () => {
                   value="Member"
                   placeholder="Member"
                   className={
-                    "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-4 bg-white " +
-                    style.inputgroup
+                    "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-4 bg-white " + style.inputgroup
                   }
                 />
               </Col>
@@ -137,14 +130,13 @@ const MemberProfile = () => {
           <Form>
             <Row>
               <Col md={3}>
-                <h5 className="text-primary pt-2">Specialization</h5>
+                <h6 className="text-primary pt-2">Specialization</h6>
               </Col>
               <Col md={7}>
                 <Form.Control
                   placeholder="Web/(AI/ML/DataScience)/Android"
                   className={
-                    "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-2 " +
-                    style.inputgroup
+                    "border-top-0 border-left-0 border-right-0 border-muted rounded-0 pl-2 " + style.inputgroup
                   }
                 />
               </Col>
@@ -156,7 +148,7 @@ const MemberProfile = () => {
         </Col>
       </Row>
       <br />
-    </Container>
+    </div>
   );
 };
 export default MemberProfile;
